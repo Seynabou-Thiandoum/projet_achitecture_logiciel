@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="UserService"
+             targetNamespace="urn:UserService"
+             xmlns:tns="urn:UserService"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <message name="authenticateRequest">
+        <part name="login"    type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+    </message>
+    <message name="authenticateResponse"><part name="return" type="xsd:string"/></message>
+
+    <message name="listUsersRequest"><part name="token" type="xsd:string"/></message>
+    <message name="listUsersResponse"><part name="return" type="xsd:string"/></message>
+
+    <message name="getUserRequest">
+        <part name="token" type="xsd:string"/>
+        <part name="id"    type="xsd:int"/>
+    </message>
+    <message name="getUserResponse"><part name="return" type="xsd:string"/></message>
+
+    <message name="addUserRequest">
+        <part name="token"    type="xsd:string"/>
+        <part name="login"    type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+        <part name="nom"      type="xsd:string"/>
+        <part name="prenom"   type="xsd:string"/>
+        <part name="email"    type="xsd:string"/>
+        <part name="role"     type="xsd:string"/>
+    </message>
+    <message name="addUserResponse"><part name="return" type="xsd:int"/></message>
+
+    <message name="updateUserRequest">
+        <part name="token"    type="xsd:string"/>
+        <part name="id"       type="xsd:int"/>
+        <part name="login"    type="xsd:string"/>
+        <part name="nom"      type="xsd:string"/>
+        <part name="prenom"   type="xsd:string"/>
+        <part name="email"    type="xsd:string"/>
+        <part name="role"     type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+    </message>
+    <message name="updateUserResponse"><part name="return" type="xsd:boolean"/></message>
+
+    <message name="deleteUserRequest">
+        <part name="token" type="xsd:string"/>
+        <part name="id"    type="xsd:int"/>
+    </message>
+    <message name="deleteUserResponse"><part name="return" type="xsd:boolean"/></message>
+
+    <portType name="UserServicePortType">
+        <operation name="authenticate">
+            <input  message="tns:authenticateRequest"/>
+            <output message="tns:authenticateResponse"/>
+        </operation>
+        <operation name="listUsers">
+            <input  message="tns:listUsersRequest"/>
+            <output message="tns:listUsersResponse"/>
+        </operation>
+        <operation name="getUser">
+            <input  message="tns:getUserRequest"/>
+            <output message="tns:getUserResponse"/>
+        </operation>
+        <operation name="addUser">
+            <input  message="tns:addUserRequest"/>
+            <output message="tns:addUserResponse"/>
+        </operation>
+        <operation name="updateUser">
+            <input  message="tns:updateUserRequest"/>
+            <output message="tns:updateUserResponse"/>
+        </operation>
+        <operation name="deleteUser">
+            <input  message="tns:deleteUserRequest"/>
+            <output message="tns:deleteUserResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="UserServiceBinding" type="tns:UserServicePortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="authenticate">
+            <soap:operation soapAction="urn:UserService#authenticate"/>
+            <input> <soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+        <operation name="listUsers">
+            <soap:operation soapAction="urn:UserService#listUsers"/>
+            <input> <soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+        <operation name="getUser">
+            <soap:operation soapAction="urn:UserService#getUser"/>
+            <input> <soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+        <operation name="addUser">
+            <soap:operation soapAction="urn:UserService#addUser"/>
+            <input> <soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+        <operation name="updateUser">
+            <soap:operation soapAction="urn:UserService#updateUser"/>
+            <input> <soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+        <operation name="deleteUser">
+            <soap:operation soapAction="urn:UserService#deleteUser"/>
+            <input> <soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></input>
+            <output><soap:body use="encoded" namespace="urn:UserService"
+                    encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></output>
+        </operation>
+    </binding>
+
+    <service name="UserService">
+        <port name="UserServicePort" binding="tns:UserServiceBinding">
+            <soap:address location="http://localhost/Projet_architecture_logicielle_diop/services-web/soap/server.php"/>
+        </port>
+    </service>
+</definitions>
