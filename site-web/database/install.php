@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/../config/config.php';
 
+
 try {
     $pdo = new PDO('mysql:host=' . DB_HOST, DB_USER, DB_PASS, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
